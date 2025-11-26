@@ -1,17 +1,19 @@
 # 🔍 LLM-Powered Government Fact Checker
-Verify claims against official Government of India press releases (2003)
+
+> Verify claims against official Government of India press releases (2003)
 
 ---
 
-This project implements a lightweight, production-ready RAG (Retrieval-Augmented Generation) fact-checking system.  
-Given any public claim, the system:
+## 📋 Overview
 
-1. Extracts the key factual statement  
-2. Embeds it using Sentence Transformers  
-3. Retrieves relevant official press-release segments via FAISS  
-4. Uses an LLM (Llama-3.3-70B via Groq) to compare claim vs evidence  
-5. Classifies the claim into: **TRUE**, **FALSE**, or **UNVERIFIABLE**  
-6. Returns evidence, reasoning, confidence score, and entities detected  
+This project implements a lightweight, production-ready RAG (Retrieval-Augmented Generation) fact-checking system. Given any public claim, the system:
+
+1. **Extracts** the key factual statement
+2. **Embeds** it using Sentence Transformers
+3. **Retrieves** relevant official press-release segments via FAISS
+4. **Compares** claim vs evidence using an LLM (Llama-3.3-70B via Groq)
+5. **Classifies** the claim into: **TRUE**, **FALSE**, or **UNVERIFIABLE**
+6. **Returns** evidence, reasoning, confidence score, and entities detected
 
 This system demonstrates practical LLM engineering, modular architecture, and real-world fact-verification workflow.
 
@@ -19,37 +21,46 @@ This system demonstrates practical LLM engineering, modular architecture, and re
 
 ## ✨ Features
 
-### ✔ Claim Understanding  
-- spaCy sentence extraction  
-- Optional LLM-based refinement for clean factual claims  
+### ✔ Claim Understanding
+- spaCy sentence extraction
+- Optional LLM-based refinement for clean factual claims
 
-### ✔ Vector Search (FAISS)  
-- Sentence-transformer embeddings  
-- Automatic chunking of press releases  
-- Fast cosine-similarity retrieval  
+### ✔ Vector Search (FAISS)
+- Sentence-transformer embeddings
+- Automatic chunking of press releases
+- Fast cosine-similarity retrieval
 
-### ✔ LLM Verdict Generation  
-- Uses Groq’s Llama-3.3-70B  
-- Structured reasoning and JSON-safe outputs  
+### ✔ LLM Verdict Generation
+- Uses Groq's Llama-3.3-70B
+- Structured reasoning and JSON-safe outputs
 
-### ✔ Two Interfaces  
-- **Interactive CLI**  
+### ✔ Two Interfaces
+- **Interactive CLI**
 - **Streamlit Web App**
 
 ---
 
 ## 🏛 System Architecture
 
+```
 User Input
-→ Claim Extractor
-→ Embedding Model
-→ FAISS Vector Store
-→ Retriever (Top-K Similarity)
-→ LLM Comparator
-→ Verdict + Reasoning + Evidence
+    ↓
+Claim Extractor
+    ↓
+Embedding Model
+    ↓
+FAISS Vector Store
+    ↓
+Retriever (Top-K Similarity)
+    ↓
+LLM Comparator
+    ↓
+Verdict + Reasoning + Evidence
+```
 
-Project Architecture
+### Project Structure
 
+```
 FACT-LLM/
 │
 ├── config.py                      # Global settings: file paths, thresholds, model names, constants
@@ -80,68 +91,139 @@ FACT-LLM/
 ├── requirements.txt               # Python dependencies
 ├── .env                           # Environment variables (Groq API key, etc.) — NOT included in repo
 └── README.md                      # Documentation & usage guide
+```
 
+---
 
 ## ⚙️ Installation
 
 ### 1. Create virtual environment (Python 3.11)
+
 ```bash
 python3.11 -m venv venv
 
+# Activate virtual environment
 source venv/bin/activate       # Mac/Linux
 venv\Scripts\activate          # Windows
+```
 
+### 2. Install dependencies
 
+```bash
 pip install -r requirements.txt
+```
 
+### 3. Download spaCy language model
 
+```bash
 python -m spacy download en_core_web_sm
+```
 
-🏗 Build the Vector Store
+### 4. Set up environment variables
+
+Create a `.env` file in the project root:
+
+```env
+GROQ_API_KEY=your_groq_api_key_here
+```
+
+---
+
+## 🏗 Build the Vector Store
 
 Place your press release CSV in:
+```
 data/processed/press_release_2003.csv
+```
 
 Then run:
+
+```bash
 python scripts/build_vector_store.py
+```
 
 This will:
+- Load CSV
+- Clean and chunk text
+- Generate embeddings
+- Build FAISS index
+- Save index + metadata
 
-Load CSV
+---
 
-Clean and chunk text
+## 🚀 Usage
 
-Generate embeddings
+### Run Streamlit Web App
 
-Build FAISS index
-
-Save index + metadata
-
-Run Streamlit Web App
+```bash
 streamlit run app.py
+```
 
-🧱 Tech Stack
-LLMs: Groq Llama-3.3-70B
-Embeddings: MiniLM-L6-v2
-Vector DB: FAISS
-NLP: spaCy
-Frontend: Streamlit
-Language: Python 3.11
+### Run Interactive CLI
 
-Limitations
-Dataset contains only select 2003 press releases
-Claims outside dataset → unverifiable by design
-No cross-year or multi-source fact checking
+```bash
+python interactive.py
+```
 
-🚀 Future Improvements
-Expand dataset automatically using PIB RSS
-Add multi-year fact checking
-Confidence calibration model
-Add caching layer for embeddings & LLM responses
-Multi-document cross-verification
+Enter claims interactively and receive verdicts with supporting evidence.
 
+---
 
-Author
-Om Bramhakshatriya
-Machine Learning Engineer
-Passionate about AI, NLP, and real-world LLM systems.
+## 🧱 Tech Stack
+
+| Component | Technology |
+|-----------|-----------|
+| **LLMs** | Groq Llama-3.3-70B |
+| **Embeddings** | MiniLM-L6-v2 |
+| **Vector DB** | FAISS |
+| **NLP** | spaCy |
+| **Frontend** | Streamlit |
+| **Language** | Python 3.11 |
+
+---
+
+## ⚠️ Limitations
+
+- Dataset contains only select 2003 press releases
+- Claims outside dataset → unverifiable by design
+- No cross-year or multi-source fact checking
+
+---
+
+## 🚀 Future Improvements
+
+- [ ] Expand dataset automatically using PIB RSS
+- [ ] Add multi-year fact checking
+- [ ] Confidence calibration model
+- [ ] Add caching layer for embeddings & LLM responses
+- [ ] Multi-document cross-verification
+
+---
+
+## 👨‍💻 Author
+
+**Om Bramhakshatriya**  
+Machine Learning Engineer  
+Passionate about AI, NLP, and real-world LLM systems
+
+---
+
+## 📄 License
+
+This project is open source and available under the MIT License.
+
+---
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome! Feel free to check the issues page.
+
+---
+
+## 📧 Contact
+
+For questions or collaboration opportunities, reach out via GitHub Issues or email.
+
+---
+
+**⭐ If you find this project useful, please consider giving it a star!**
