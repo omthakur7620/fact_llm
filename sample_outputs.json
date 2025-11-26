@@ -1,0 +1,63 @@
+[
+  {
+    "original_text": "The Indian government has announced free electricity to all farmers starting July 2025",
+    "verdict": "UNVERIFIABLE",
+    "reasoning": "The claim about the Indian government announcing free electricity to all farmers starting July 2025 cannot be verified as there are no relevant facts found in the verified database to support or contradict this claim.",
+    "confidence": "low",
+    "claims_analyzed": [
+      "The Indian government has announced free electricity to all farmers starting July 2025"
+    ],
+    "verification_details": [
+      {
+        "claim": "The Indian government has announced free electricity to all farmers starting July 2025",
+        "verification_result": {
+          "verdict": "UNVERIFIABLE",
+          "confidence": "low",
+          "reasoning": "The claim about the Indian government announcing free electricity to all farmers starting July 2025 cannot be verified as there are no relevant facts found in the verified database to support or contradict this claim.",
+          "key_evidence": [],
+          "retrieved_facts_count": 0,
+          "retrieved_facts": []
+        }
+      }
+    ],
+    "entities_found": [
+      {
+        "text": "Indian",
+        "label": "NORP",
+        "description": "Nationalities or religious or political groups"
+      },
+      {
+        "text": "July 2025",
+        "label": "DATE",
+        "description": "Absolute or relative dates or periods"
+      }
+    ],
+    "key_evidence": [],
+    "retrieved_facts_count": 0
+  },
+  {
+    "original_text": "Indian Railways have earmarked Nilgiri Mountain Railways for promotion of heritage tourism by steam locomotive",
+    "verdict": "TRUE",
+    "reasoning": "The claim is directly supported by the retrieved fact from the Ministry of Railways, which states that Indian Railways have earmarked Nilgiri Mountain Railways for promotion of heritage tourism by steam locomotive. The fact also mentions that Nilgiri Mountain Railways is on metre gauge, providing additional context but not contradicting the claim.",
+    "confidence": "high",
+    "claims_analyzed": [
+      "Indian Railways have earmarked Nilgiri Mountain Railways for promotion of heritage tourism by steam locomotive"
+    ],
+    "verification_details": [
+      {
+        "claim": "Indian Railways have earmarked Nilgiri Mountain Railways for promotion of heritage tourism by steam locomotive",
+        "verification_result": {
+          "verdict": "TRUE",
+          "confidence": "high",
+          "reasoning": "The claim is directly supported by the retrieved fact from the Ministry of Railways, which states that Indian Railways have earmarked Nilgiri Mountain Railways for promotion of heritage tourism by steam locomotive. The fact also mentions that Nilgiri Mountain Railways is on metre gauge, providing additional context but not contradicting the claim.",
+          "key_evidence": [
+            "Indian Railways have earmarked Nilgiri Mountain Railways on metre guage and Darjeeling Himalayan Railways on narrow guage for promotion of heritage tourism by steam locomotive.",
+            "Source: Ministry of Railways"
+          ],
+          "retrieved_facts_count": 1,
+          "retrieved_facts": [
+            {
+              "similarity": 0.8503949642181396,
+              "content": "STEAM LOCOMOTIVES FOR PROMOTION OF HERITAGE TOURISM. Indian Railways have earmarked Nilgiri Mountain Railways on metre guage and Darjeeling Himalayan Railways on narrow guage for promotion of heritage tourism by steam locomotive. During the year-long celebrations of 150 glorious years of railways in India, steam loco hauled trains were run on Mumbai-Thane, Shimla-Kathleeghat, Bolarm-Monoharabad and Howrah-Bandel sections by reviving steam locomotives. At present, 33 steam locomotives are working on Indian Railways.",
+              "source": "Ministry of Railways",
+              "id": 
