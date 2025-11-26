@@ -52,37 +52,35 @@ Project Architecture
 
 FACT-LLM/
 │
-├── config.py                 # Global configuration: paths, thresholds, model names
+├── config.py                      # Global settings: file paths, thresholds, model names, constants
 │
-├── src/
-│   ├── claim_extractor.py    # Extracts factual claims using spaCy + rule-based logic
-│   ├── embeddings.py         # Loads SentenceTransformer model & generates embeddings
-│   ├── vector_store.py       # Builds/loads FAISS index and handles chunking
-│   ├── retriever.py          # Retrieves top-K similar chunks from vector DB
-│   ├── llm_client.py         # Handles Groq LLM calls and structured responses
-│   ├── fact_checker.py       # Main pipeline: extraction → retrieval → verdict
-│   └── __init__.py           # Package initializer
+├── src/                           # Core backend modules (RAG + Fact Checking Pipeline)
+│   ├── claim_extractor.py         # Extracts factual claims using spaCy + rule-based logic
+│   ├── embeddings.py              # Loads SentenceTransformer model & generates embeddings
+│   ├── vector_store.py            # Builds/loads FAISS index & handles text chunking
+│   ├── retriever.py               # Retrieves top-K semantically similar chunks
+│   ├── llm_client.py              # Manages Groq LLM calls with structured prompts
+│   ├── fact_checker.py            # Main pipeline: claim extraction → retrieval → verification verdict
+│   └── __init__.py                # Makes src/ a Python package
 │
-├── scripts/
-│   ├── build_vector_store.py # Generates FAISS index from press_release_2003.csv
-│   
+├── scripts/                       # Utility scripts for preprocessing & indexing
+│   ├── build_vector_store.py      # Generates FAISS index from processed dataset
 │
-├
-│── app.py      # Full web UI for fact checking
-│── interactive.py            # Interactive terminal (CLI) version
+├── app.py                         # Web-based UI for fact checking (e.g., Streamlit/FastAPI)
+├── interactive.py                 # Interactive CLI version for terminal usage
 │
 ├── data/
-│   ├── raw/                  # Original CSVs or government raw data
-│   ├── processed/            # Cleaned datasets (e.g., press_release_2003.csv)
-│   └── vector_db/            # FAISS index + metadata.json
+│   ├── raw/                       # Original unprocessed files (government datasets, reports, etc.)
+│   ├── processed/                 # Cleaned dataset (e.g., press_release_2003.csv)
+│   └── vector_db/                 # FAISS index + metadata.json stored here
 │
-├── sample_inputs.json        # Example test inputs for evaluation
-├── sample_outputs.json       # Example true/false/unverifiable outputs
-├── requirements.txt          # Python dependencies
-├── .env                      # API keys (Groq key, etc.)
-└── README.md                 # Documentation
+├── sample_inputs.json             # Example inputs for testing the fact-checking pipeline
+├── sample_outputs.json            # Example outputs: True / False / Unverifiable verdicts
+│
+├── requirements.txt               # Python dependencies
+├── .env                           # Environment variables (Groq API key, etc.) — NOT included in repo
+└── README.md                      # Documentation & usage guide
 
----
 
 ## ⚙️ Installation
 
